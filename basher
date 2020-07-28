@@ -27,7 +27,7 @@ while :; do
 			printf "\n"
 			for input in "${input[@]}"; do
 				if [[ "$input" == "help" ]]; then
-					printf "You can also use some of these commands while chatting by adding '/' before.\ne.g '/help'\n\nhelp - Show a list of commands.\naccount - Show your account stats.\nreset - Reset your account stats.\nexit - Quit Basher.\nclear - Clear your terminal.\nchat - Start chatting.\ndel <value> - Delete the user's cached chat. (You cannot delete other user's cache while chatting, it will only delete your own.)\n\n"
+					printf "You can also use some of these commands WHILE CHATTING by adding '/' before.\ne.g '/help'\n\nhelp - Show a list of commands.\naccount - Show your account stats.\nreset - Reset your account stats.\nexit - Quit Basher.\nclear - Clear your terminal.\nchat - Start chatting.\ndel <value> - Delete the user's cached chat. (You cannot delete other user's cache while chatting, it will only delete your own.)\n\n"
 					continue 2;
 				elif [[ "$input" == "account" ]]; then
 					cat ~/.basher/account.txt
@@ -61,14 +61,26 @@ while :; do
 					clear
 					break
 				elif [[ "$input" == "del" ]]; then
-					printf "You need to add a value between 1 and 2 after 'del' for the command to work!\n\n"
+					printf "You need to add a valid value! (THERE ARE ONLY 2 USERS!)\ne.g: 'del 1' to delete User 1 cache.\n\n"
 					continue 2;
 				elif [[ "$input" == "del 1" ]];then
-					rm $U1
-					continue 2;
+					if [ -f $U1 ]; then
+						printf "Cache deleted!\n\n"
+						rm $U1
+						continue 2;
+					else
+						printf "User 1 doesn't have any cache to delete.\n\n"
+						continue 2;
+					fi
 				elif [[ "$input" == "del 2" ]]; then
-					rm $U2
-					continue 2;
+					if [ -f $U2 ]; then
+						printf "Cache deleted!\n\n"
+						rm $U2
+						continue 2;
+					else
+						printf "User 2 doesn't have any cache to delete.\n\n"
+						continue 2;
+					fi
 				else
 					printf "Command not found.\n\n"
 					continue 2;
