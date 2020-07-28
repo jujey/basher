@@ -108,8 +108,16 @@ while :; do
 							clear
 							continue 2;
 						elif [[ "$text" == '/del' ]]; then
-							printf "$name: $text\n" >> $U1
-							rm $U1
+							if [ -f $U1 ]; then
+								printf "\nYou successfully deleted your own cache!\n\n"
+								rm $U1
+								continue 2;
+							else
+								printf "\nThere is no cache to delete\n\n"
+								continue 2;
+							fi
+						elif [[ "$text" == '/' ]]; then
+							printf "\nCommand not found.\n\n"
 							continue 2;
 						else
 							printf "$name: $text\n" >> $U1
@@ -133,8 +141,16 @@ while :; do
 							clear
 							continue 2;
 						elif [[  "$text" == '/del' ]]; then
-							printf "$name: $text\n" >> $U2
-							rm $U2
+							if [ -f $U2 ]; then
+								printf "\nYou successfully deleted your own cache!\n\n"
+								rm $U2
+								continue 2;
+							else
+								printf "\nThere is no cache to delete\n\n"
+								continue 2;
+							fi
+						elif [[ "$text" == '/' ]]; then
+							printf "\nCommand not found.\n\n"
 							continue 2;
 						else
 							printf "$name: $text\n" >> $U2
