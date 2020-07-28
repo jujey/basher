@@ -27,7 +27,7 @@ while :; do
 			printf "\n"
 			for input in "${input[@]}"; do
 				if [[ "$input" == "help" ]]; then
-					printf "You can also use some of these commands while chatting by adding '/' before.\n\nhelp - Show a list of commands.\naccount - Show your account stats.\nreset - Reset your account stats.\nexit - Quit Basher.\nclear - Clear your terminal.\nchat - Start chatting.\n\n"
+					printf "You can also use some of these commands while chatting by adding '/' before.\ne.g '/help'\n\nhelp - Show a list of commands.\naccount - Show your account stats.\nreset - Reset your account stats.\nexit - Quit Basher.\nclear - Clear your terminal.\nchat - Start chatting.\ndel <value> - Delete the user's cached chat. (You cannot delete other user's cache while chatting, it will only delete your own.)\n\n"
 					continue 2;
 				elif [[ "$input" == "account" ]]; then
 					cat ~/.basher/account.txt
@@ -53,12 +53,22 @@ while :; do
 					exit 1
 				elif [[ "$input" == "clear" ]]; then
 					clear
-					printf "Your account has been created under ~/.basher/user.txt\n\n"
+					printf "Welcome back %s\n" "${name}!"
+					printf "\n"
 					printf "Type 'help' for more information.\n\n"
 					continue 2;
 				elif [[ "$input" == "chat" ]]; then
 					clear
 					break
+				elif [[ "$input" == "del" ]]; then
+					printf "You need to add a value between 1 and 2 after 'del' for the command to work!\n\n"
+					continue 2;
+				elif [[ "$input" == "del 1" ]];then
+					rm $U1
+					continue 2;
+				elif [[ "$input" == "del 2" ]]; then
+					rm $U2
+					continue 2;
 				else
 					printf "Command not found.\n\n"
 					continue 2;
@@ -76,10 +86,19 @@ while :; do
 						if [[ "$text" == "" ]]; then
 							printf "You need to type something in order to send a message.\n"
 							continue 2;
+						elif [[ "$text" == '/help' ]]; then
+							printf "\n"
+							printf "While chatting you are reduced to a certain amount of commands such as:\n/help\n/exit\n/clear\n/del\n\n"
 						elif [[ "$text" == '/exit' ]]; then
-							printf "$name: $text\n" >> $U1
 							clear
 							exec "$0"
+						elif [[ "$text" == '/clear' ]]; then
+							clear
+							continue 2;
+						elif [[ "$text" == '/del' ]]; then
+							printf "$name: $text\n" >> $U1
+							rm $U1
+							continue 2;
 						else
 							printf "$name: $text\n" >> $U1
 							continue 2;
@@ -92,10 +111,19 @@ while :; do
 						if [[ "$text" == "" ]]; then
 							printf "You need to type something in order to send a message.\n"
 							continue 2;
+						elif [[ "$text" == '/help' ]]; then
+							printf "\n"
+							printf "While chatting you are reduced to a certain amount of commands such as:\n/help\n/exit\n/clear\n/del\n\n"
 						elif [[ "$text" == '/exit' ]]; then
-							printf "$name: $text\n" >> $U2
 							clear
 							exec "$0"
+						elif [[ "$text" == '/clear' ]]; then
+							clear
+							continue 2;
+						elif [[  "$text" == '/del' ]]; then
+							printf "$name: $text\n" >> $U2
+							rm $U2
+							continue 2;
 						else
 							printf "$name: $text\n" >> $U2
 							continue 2;
