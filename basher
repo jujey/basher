@@ -36,7 +36,7 @@ while :; do
 					if [ -f "$file" ]; then
 						clear
 						rm ~/.basher/user.txt
-						printf "user.txt was removed successfully and your account has been reseted.\n\nYou will now create your new account in 5 seconds! DO NOT TYPE ANYTHING\n"
+						printf "'user.txt' was removed successfully and your account has been reseted.\n\nYou will now create your new account in 5 seconds! DO NOT TYPE ANYTHING\n\n"
 						sleep 5
 						clear
 						exec "$0"
@@ -115,9 +115,6 @@ while :; do
 								printf "\nThere is no cache to delete\n\n"
 								continue 2;
 							fi
-						elif [[ "$text" == '/' ]]; then
-							printf "\nCommand not found.\n\n"
-							continue 2;
 						else
 							printf "$name: $text\n" >> $U1
 							continue 2;
@@ -147,9 +144,6 @@ while :; do
 								printf "\nThere is no cache to delete\n\n"
 								continue 2;
 							fi
-						elif [[ "$text" == '/' ]]; then
-							printf "\nCommand not found.\n\n"
-							continue 2;
 						else
 							printf "$name: $text\n" >> $U2
 							continue 2;
