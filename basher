@@ -35,7 +35,8 @@ while :; do
 				elif [[ "$input" == "reset" ]]; then
 					if [ -f "$file" ]; then
 						clear
-						rm ~/.basher/user.txt
+						rm -rf ~/.basher/user.txt
+						rm -rf ~/.basher/account.txt
 						printf "'user.txt' was removed successfully and your account has been reseted.\n\nYou will now create your new account in 5 seconds! DO NOT TYPE ANYTHING\n\n"
 						sleep 5
 						clear
@@ -92,6 +93,8 @@ while :; do
 			mapfile -t -O 1 user <"$file"
 			for user in ${user[3]}; do
 				if [[ "$user" == "1" ]]; then
+					nc -vl 69420 > ~/.basher/cache/chat2.txt
+					nc -N $ip2 69420 < ~/.basher/cache/chat1.txt
 					read -rp "$name: " text
 					for text in "${text[@]}"; do
 						if [[ "$text" == "" ]]; then
@@ -116,11 +119,14 @@ while :; do
 								continue 2;
 							fi
 						else
+							cat ~/.basher/cache/chat2.txt
 							printf "$name: $text\n" >> $U1
 							continue 2;
 						fi
 					done	
 				else
+					nc -vl 69420 > ~/.basher/cache/chat1.txt
+					nc -N $ip1 69420 < ~/.basher/cache/chat2.txt
 					read -rp "$name: " text
 					for text in "${text[@]}"; do
 						if [[ "$text" == "" ]]; then
@@ -145,6 +151,7 @@ while :; do
 								continue 2;
 							fi
 						else
+							cat ~/.basher/cache/chat1.txt
 							printf "$name: $text\n" >> $U2
 							continue 2;
 						fi		
@@ -187,7 +194,7 @@ while :; do
 		
 		while :; do
 			printf "(YOU MUST ONLY TYPE NUMBERS!)\n\n"
-			read -rp "Are you User 1 or User 2? " user
+			read -rp "Are you User 1 or User 2? (IP1/IP2) " user
 			for user in "${user[@]}"; do
 				if [[ "$user" -gt 2 ]]; then
 					clear
@@ -201,11 +208,26 @@ while :; do
 			done
 		break;
 		done
-		
 		clear
+
+		while :; do
+			read -rp "You'll need to type your ip address. " ip
+			mapfile -t -O 1 user <"$file"
+			for user in ${user[3]}; do
+				if [[ "$user[@]" == 1 ]]; then
+					$ip = ip1
+				else
+					$ip = ip2
+				fi
+			done
+		break;
+		done
+		clear
+
 		printf "Your account has been created under ~/.basher/user.txt\n\n"
-		printf "$name\n$age\n$user\n" > $file
-		printf "Username = $name\nAge = $age\nUser = $user\n" > $account
+		printf "$name\n$age\n$user\n$ip\n" > $file
+		printf "Username = $name\nAge = $age\nUser = $user\nIp = $ip\n" > $account
+
 		cat $account
 		printf "\n"
 		printf "Wait..."
