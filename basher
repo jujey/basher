@@ -124,7 +124,7 @@ while :; do
 					done	
 				else
 					mapfile -t -O 1 ip <"$file"
-					for user in ${ip[4]}; do
+					for ip in ${ip[4]}; do
 						netcat $ip 55555
 						read -rp "$name: " text
 						for text in "${text[@]}"; do
