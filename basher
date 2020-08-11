@@ -37,13 +37,13 @@ while :; do
 						clear
 						rm -rf ~/.basher/user.txt
 						rm -rf ~/.basher/account.txt
-						printf "'user.txt' was removed successfully and your account has been reseted.\n\nYou will now create your new account in 5 seconds! DO NOT TYPE ANYTHING\n\n"
+						printf "'user.txt' was removed successfully and your account has been reseted.\n\nYou will now create your new account in 5 seconds! DO NOT TYPE ANYTHING!!!\n\n"
 						sleep 5
 						clear
 						exec "$0"
 					else 
 						clear
-						printf "We cannot reset your account because $file does not exist.\n\nYou'll have to create a new account.\n\nCreating a new account in 5 seconds... DO NOT TYPE ANYTHING"
+						printf "We cannot reset your account because $file does not exist.\n\nYou'll have to create a new account.\n\nCreating a new account in 5 seconds... DO NOT TYPE ANYTHING!!!"
 						sleep 5
 						clear
 						exec "$0"
@@ -93,8 +93,7 @@ while :; do
 			mapfile -t -O 1 user <"$file"
 			for user in ${user[3]}; do
 				if [[ "$user" == "1" ]]; then
-					nc -vl 69420 > ~/.basher/cache/chat2.txt
-					nc -N $ip2 69420 < ~/.basher/cache/chat1.txt
+					netcat -l -p 55555
 					read -rp "$name: " text
 					for text in "${text[@]}"; do
 						if [[ "$text" == "" ]]; then
@@ -119,14 +118,12 @@ while :; do
 								continue 2;
 							fi
 						else
-							cat ~/.basher/cache/chat2.txt
 							printf "$name: $text\n" >> $U1
 							continue 2;
 						fi
 					done	
 				else
-					nc -vl 69420 > ~/.basher/cache/chat1.txt
-					nc -N $ip1 69420 < ~/.basher/cache/chat2.txt
+					netcat $ip 55555
 					read -rp "$name: " text
 					for text in "${text[@]}"; do
 						if [[ "$text" == "" ]]; then
@@ -151,7 +148,6 @@ while :; do
 								continue 2;
 							fi
 						else
-							cat ~/.basher/cache/chat1.txt
 							printf "$name: $text\n" >> $U2
 							continue 2;
 						fi		
@@ -194,7 +190,7 @@ while :; do
 		
 		while :; do
 			printf "(YOU MUST ONLY TYPE NUMBERS!)\n\n"
-			read -rp "Are you User 1 or User 2? (IP1/IP2) " user
+			read -rp "Are you User 1 or User 2? (USER1=HOST / USER2=CLIENT) " user
 			for user in "${user[@]}"; do
 				if [[ "$user" -gt 2 ]]; then
 					clear
@@ -211,22 +207,21 @@ while :; do
 		clear
 
 		while :; do
-			read -rp "You'll need to type your ip address. " ip
-			mapfile -t -O 1 user <"$file"
-			for user in ${user[3]}; do
-				if [[ "$user[@]" == 1 ]]; then
-					$ip = ip1
-				else
-					$ip = ip2
-				fi
-			done
+			printf "(YOU NEED TO TYPE THE HOST'S IP ADDRESS!!!)\n\n"
+			read -rp "IP address: " ip
 		break;
 		done
 		clear
 
-		printf "Your account has been created under ~/.basher/user.txt\n\n"
-		printf "$name\n$age\n$user\n$ip\n" > $file
-		printf "Username = $name\nAge = $age\nUser = $user\nIp = $ip\n" > $account
+		if [[ $user = 1 ]]; then
+			printf "Your account has been created under ~/.basher/user.txt\n\n"
+			printf "$name\n$age\n$user\n$ip\n" > $file
+			printf "Username = $name\nAge = $age\nUser = $user (HOST)\nIp = $ip\n" > $account
+		else
+			printf "Your account has been created under ~/.basher/user.txt\n\n"
+			printf "$name\n$age\n$user\n$ip\n" > $file
+			printf "Username = $name\nAge = $age\nUser = $user (CLIENT)\nIp = $ip\n" > $account
+		fi
 
 		cat $account
 		printf "\n"
