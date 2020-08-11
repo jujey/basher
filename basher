@@ -91,9 +91,9 @@ while :; do
 		
 		while :; do
 			mapfile -t -O 1 user <"$file"
-			for user in ${user[3]}; do
+			for user in ${user[2]}; do
 				if [[ "$user" == "1" ]]; then
-					netcat -l -p 55555
+#					netcat -l -p 55555
 					read -rp "$name: " text
 					for text in "${text[@]}"; do
 						if [[ "$text" == "" ]]; then
@@ -124,8 +124,8 @@ while :; do
 					done	
 				else
 					mapfile -t -O 1 ip <"$file"
-					for ip in ${ip[4]}; do
-						netcat $ip 55555
+					for ip in ${ip[3]}; do
+#						netcat $ip 55555
 						read -rp "$name: " text
 						for text in "${text[@]}"; do
 							if [[ "$text" == "" ]]; then
@@ -176,19 +176,6 @@ while :; do
 		printf "Welcome %s\n" "${name}!"
 		printf "\n"
 	
-		while :; do
-			read -rp "How old are you? " age
-			for age in "${age[@]}"; do
-				if [[ "$age" -lt 10 ]]; then
-					printf "Wow that's a little too young to join, sorry!\n"
-					continue 2;
-				fi
-			done
-		break;
-		done
-		
-		printf "Age registered successfully!\n"
-		printf "You are $age years old.\n\n"
 		clear
 		
 		while :; do
@@ -218,12 +205,12 @@ while :; do
 
 		if [[ $user = 1 ]]; then
 			printf "Your account has been created under ~/.basher/user.txt\n\n"
-			printf "$name\n$age\n$user\n$ip\n" > $file
-			printf "Username = $name\nAge = $age\nUser = $user (HOST)\nIp = $ip\n" > $account
+			printf "$name\n$user\n$ip\n" > $file
+			printf "Username = $name\nUser = $user (HOST)\nIp = $ip\n" > $account
 		else
 			printf "Your account has been created under ~/.basher/user.txt\n\n"
-			printf "$name\n$age\n$user\n$ip\n" > $file
-			printf "Username = $name\nAge = $age\nUser = $user (CLIENT)\nIp = $ip\n" > $account
+			printf "$name\n$user\n$ip\n" > $file
+			printf "Username = $name\nUser = $user (CLIENT)\nIp = $ip\n" > $account
 		fi
 
 		cat $account
