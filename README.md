@@ -13,4 +13,4 @@ About 2 days and it was actuallly very frustrating/enjoyable at times, (still tr
 I encountered a lot of bugs in the way but I fixed all of them, so I guess we're safe to say that this is the first stable version of Basher!
 
 # Installation
-`cd ~ && git clone https://github.com/jujey/basher && cd ~/basher/ && mv basher /usr/bin/ && sudo chmod a+rx /usr/bin/basher`
+`cd ~ && git clone https://github.com/jujey/basher && cd ~/basher/ && sudo mv basher /usr/bin/ && sudo chmod a+rx /usr/bin/basher`
