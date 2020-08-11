@@ -123,34 +123,37 @@ while :; do
 						fi
 					done	
 				else
-					netcat $ip 55555
-					read -rp "$name: " text
-					for text in "${text[@]}"; do
-						if [[ "$text" == "" ]]; then
-							printf "You need to type something in order to send a message.\n"
-							continue 2;
-						elif [[ "$text" == '/help' ]]; then
-							printf "\n"
-							printf "While chatting you are reduced to a certain amount of commands such as:\n/help\n/exit\n/clear\n/del\n\n"
-						elif [[ "$text" == '/exit' ]]; then
-							clear
-							exec "$0"
-						elif [[ "$text" == '/clear' ]]; then
-							clear
-							continue 2;
-						elif [[  "$text" == '/del' ]]; then
-							if [ -f $U2 ]; then
-								printf "\nYou successfully deleted your own cache!\n\n"
-								rm $U2
+					mapfile -t -O 1 ip <"$file"
+					for user in ${ip[4]}; do
+						netcat $ip 55555
+						read -rp "$name: " text
+						for text in "${text[@]}"; do
+							if [[ "$text" == "" ]]; then
+								printf "You need to type something in order to send a message.\n"
 								continue 2;
+							elif [[ "$text" == '/help' ]]; then
+								printf "\n"
+								printf "While chatting you are reduced to a certain amount of commands such as:\n/help\n/exit\n/clear\n/del\n\n"
+							elif [[ "$text" == '/exit' ]]; then
+								clear
+								exec "$0"
+							elif [[ "$text" == '/clear' ]]; then
+								clear
+								continue 2;
+							elif [[  "$text" == '/del' ]]; then
+								if [ -f $U2 ]; then
+									printf "\nYou successfully deleted your own cache!\n\n"
+									rm $U2
+									continue 2;
+								else
+									printf "\nThere is no cache to delete\n\n"
+									continue 2;
+								fi
 							else
-								printf "\nThere is no cache to delete\n\n"
+								printf "$name: $text\n" >> $U2
 								continue 2;
-							fi
-						else
-							printf "$name: $text\n" >> $U2
-							continue 2;
-						fi		
+							fi		
+						done
 					done
 				fi
 			done
