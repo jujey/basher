@@ -14,7 +14,7 @@ Still in development...
 
 Current objectives:
 - Bug fixing.
-- Be able to share chat1.txt/chat2.txt between two different machines to achieve LAN.
+- Being able to share `chat1.txt`/`chat2.txt` between two different machines to achieve LAN.
 - Maybe add custom names for chatrooms?
 
 # Installation
