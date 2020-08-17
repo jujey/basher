@@ -8,9 +8,14 @@ Basher is still pretty simple though, as I haven't reached the main point of it,
 No I don't plan on making this online as it can be very difficult to implement since this is based on `Bash`, although I've heard of people being able to do it in the past.
 I will though try to make this LAN in the future!
 
-## How long did it take to code the first version of it?
-About 2 days and it was actuallly very frustrating/enjoyable at times, (still trying to get used to programming).
-I encountered a lot of bugs in the way but I fixed all of them, so I guess we're safe to say that this is the first stable version of Basher!
+## Status
+
+Still in development...
+
+Current objectives:
+- Bug fixing.
+- Be able to share chat1.txt/chat2.txt between two different machines to achieve LAN.
+- Maybe add custom names for chatrooms?
 
 # Installation
 `cd ~ && rm -rf basher && git clone https://github.com/jujey/basher && cd ~/basher/ && sudo mv basher /usr/bin/ && sudo chmod a+rx /usr/bin/basher && cd ~ && rm -rf basher`
