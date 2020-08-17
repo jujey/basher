@@ -9,7 +9,7 @@ Listen, I'm trying my best to achieve this!
 
 ## Status
 
-Still in development...
+- Still in development...
 
 Current objectives:
 - Bug fixing.
