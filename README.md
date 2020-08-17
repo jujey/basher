@@ -5,8 +5,7 @@ Basher is still pretty simple though, as I haven't reached the main point of it,
 
 # ""F.A.Q""
 ## Will this ever be online?
-No I don't plan on making this online as it can be very difficult to implement since this is based on `Bash`, although I've heard of people being able to do it in the past.
-I will though try to make this LAN in the future!
+Listen, I'm trying my best to achieve this!
 
 ## Status
 
