@@ -5,7 +5,7 @@ Basher is still in development, as I haven't reached a way to establish a LAN co
 
 ## Status
 
-- In development...
+- Abandoned.
 
 Current objectives:
 - Bug fixing.
